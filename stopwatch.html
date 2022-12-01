@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<body>
+<p id="demo1" style="font-size: 50px;  text-align: center; width: 25%; padding: 50px; border-radius: 10px; position: relative; top: 100px; margin-left: auto; margin-right: auto; border: 1px solid green; background-color: blueviolet; color: gold;"></p>
+<p id="demo2" style="font-size: 50px;  text-align: center; width: 25%; padding: 50px; border-radius: 10px; position: relative; top: 100px; margin-left: auto; margin-right: auto; border: 1px solid green; background-color: blueviolet; color: gold;"></p>
+<button id="button1" type="button"  onclick="start()"  style="display:block;font-size: 20px;  text-align: center; width: 10%; padding: 20px; border-radius: 5px; position: absolute; top: 530px; left: 45%; border: 1px solid green; background-color: green; color: white; display: block;">Start</button>
+<button id="button2" type="button"                     style="display:none;font-size: 20px;  text-align: center; width: 10%; padding: 20px; border-radius: 5px; position: absolute; top: 530px; left: 45%; border: 1px solid green; background-color: coral; color: white;">Stop</button>
+<button id="button3" type="button"  onclick="reset()"  style="display:none;font-size: 20px;  text-align: center; width: 10%; padding: 20px; border-radius: 5px; position: absolute; top: 530px; left: 35%; border: 1px solid green; background-color: darkcyan; color: white;">Reset</button>
+<button id="button4" type="button"  onclick="resume()" style="display:none;font-size: 20px;  text-align: center; width: 10%; padding: 20px; border-radius: 5px; position: absolute; top: 530px; left: 55%; border: 1px solid green; background-color: darkgray; color: white;">Resume</button>
+
+<script>
+    const d= new Date();
+    document.getElementById("demo1").innerHTML = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+    setInterval(datea, 10);
+
+  function datea()
+  {
+  const d = new Date();
+  document.getElementById("demo1").innerHTML = d.getHours() + ":" + d.getMinutes() + ":" + d.getSeconds();
+  }
+
+
+
+
+  var s=0,h=0,m=0, s1=0, m1=0, h1=0;
+  document.getElementById("demo2").innerHTML = "00:00:00";
+  function start()
+  {
+    var s=0,h=0,m=0, s1=0, m1=0, h1=0;
+    document.getElementById("button1").style.display="none";
+    document.getElementById("button2").style.display="block";
+    stopwatch();
+  }
+      
+  function resume()
+  {
+    document.getElementById("button2").style.display="block";
+    document.getElementById("button3").style.display="none";
+    document.getElementById("button1").style.display="none";
+    document.getElementById("button4").style.display="none";
+    stopwatch();
+  }
+
+  function reset()
+  {
+    document.getElementById("demo2").innerHTML = "00:00:00";
+    document.getElementById("button2").style.display="none";
+    document.getElementById("button3").style.display="none";
+    document.getElementById("button1").style.display="block";
+    document.getElementById("button4").style.display="none";
+  } 
+  function stopwatch()
+  {
+    const myinterval=setInterval(main,10);
+    function main()
+    {
+      s++;
+      s1=s; m1=m; h1=h;
+      if(s==60)
+      {
+        s=0; m++;
+      }
+      if(m==60)
+      {
+        m=0; h++;
+      }
+      if(s<10){s1="0"+s;}
+      if(m<10){m1="0"+m;}
+      if(h<10){h1="0"+h;}
+      document.getElementById("demo2").innerHTML= h1 + ":" + m1 + ":" + s1;
+
+      document.getElementById("button2").onclick= function() {stop() };
+      function stop()
+      {
+        document.getElementById("button2").style.display="none";
+        document.getElementById("button1").style.display="none";
+        document.getElementById("button3").style.display="block";
+        document.getElementById("button4").style.display="block";
+        clearInterval(myinterval);
+      }
+    }  
+  }
+</script>
+
+</body>
+</html>
